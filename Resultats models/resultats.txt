@@ -1,0 +1,112 @@
+----  Perceptron  ----
+Parametres per defecte: {'alpha': 0.0001, 'class_weight': None, 'early_stopping': False, 'eta0': 1.0, 'fit_intercept': True, 'max_iter': 1000, 'n_iter_no_change': 5, 'n_jobs': None, 'penalty': None, 'random_state': 0, 'shuffle': True, 'tol': 0.001, 'validation_fraction': 0.1, 'verbose': 0, 'warm_start': False}
+
+Score del model amb  0.5 :  0.706
+Score del model amb  0.8 :  0.7175
+Score del model amb  0.7 :  0.765
+
+Score promig amb k-fold =  2  :  0.713
+Score promig amb k-fold =  3  :  0.7210126168147157
+Score promig amb k-fold =  4  :  0.74
+Score promig amb k-fold =  5  :  0.702
+Score promig amb k-fold =  6  :  0.7260059460658264
+
+Classes trobades:  [0. 1. 2. 3.]
+Atributs trobats:  20
+
+Score mitja del Leave One Out:  0.727
+
+
+----  KNN  ----
+Parametres per defecte: {'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'metric_params': None, 'n_jobs': None, 'n_neighbors': 5, 'p': 2, 'weights': 'uniform'}
+
+Score del model amb  0.5 :  0.506
+Score del model amb  0.8 :  0.52
+Score del model amb  0.7 :  0.5116666666666667
+
+Score promig amb k-fold =  2  :  0.4985
+Score promig amb k-fold =  3  :  0.508495001748375
+Score promig amb k-fold =  4  :  0.5
+Score promig amb k-fold =  5  :  0.5029999999999999
+Score promig amb k-fold =  6  :  0.5014940089790388
+
+Classes trobades:  [0. 1. 2. 3.]
+Atributs trobats:  20
+
+Score mitja del Leave One Out:  0.5145
+
+
+----  Decision Tree  ----
+Parametres per defecte: {'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': None, 'max_leaf_nodes': None, 'min_impurity_decrease': 0.0, 'min_impurity_split': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'presort': 'deprecated', 'random_state': None, 'splitter': 'best'}
+
+Score del model amb  0.5 :  0.809
+Score del model amb  0.8 :  0.81
+Score del model amb  0.7 :  0.8
+
+Score promig amb k-fold =  2  :  0.8294999999999999
+Score promig amb k-fold =  3  :  0.824504414459437
+Score promig amb k-fold =  4  :  0.8294999999999999
+Score promig amb k-fold =  5  :  0.8210000000000001
+Score promig amb k-fold =  6  :  0.8265076453699208
+
+Classes trobades:  [0. 1. 2. 3.]
+Atributs trobats:  20
+
+Score mitja del Leave One Out:  0.839
+
+
+----  Random Forest  ----
+Parametres per defecte: {'bootstrap': True, 'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': 'auto', 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_impurity_split': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'n_estimators': 100, 'n_jobs': None, 'oob_score': False, 'random_state': None, 'verbose': 0, 'warm_start': False}
+
+Score del model amb  0.5 :  0.864
+Score del model amb  0.8 :  0.88
+Score del model amb  0.7 :  0.88
+
+Score promig amb k-fold =  2  :  0.8674999999999999
+Score promig amb k-fold =  3  :  0.8729959344651999
+Score promig amb k-fold =  4  :  0.879
+Score promig amb k-fold =  5  :  0.877
+Score promig amb k-fold =  6  :  0.88649577721434
+
+Classes trobades:  [0. 1. 2. 3.]
+Atributs trobats:  20
+
+Score mitja del Leave One Out:  0.881
+
+
+----  Logistic Regression  ----
+Parametres per defecte: {'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': None, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'l2', 'random_state': None, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}
+
+Score del model amb  0.5 :  0.948
+Score del model amb  0.8 :  0.965
+Score del model amb  0.7 :  0.96
+
+Score promig amb k-fold =  2  :  0.954
+Score promig amb k-fold =  3  :  0.956001728865297
+Score promig amb k-fold =  4  :  0.9605
+Score promig amb k-fold =  5  :  0.9625
+Score promig amb k-fold =  6  :  0.9634964305622988
+
+Classes trobades:  [0. 1. 2. 3.]
+Atributs trobats:  20
+
+Score mitja del Leave One Out:  0.966
+
+
+----  Support Vector Machines  ----
+Parametres per defecte: {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovr', 'degree': 3, 'gamma': 'scale', 'kernel': 'rbf', 'max_iter': -1, 'probability': False, 'random_state': None, 'shrinking': True, 'tol': 0.001, 'verbose': False}
+
+Score del model amb  0.5 :  0.854
+Score del model amb  0.8 :  0.855
+Score del model amb  0.7 :  0.8516666666666667
+
+Score promig amb k-fold =  2  :  0.8634999999999999
+Score promig amb k-fold =  3  :  0.8679909294601948
+Score promig amb k-fold =  4  :  0.886
+Score promig amb k-fold =  5  :  0.885
+Score promig amb k-fold =  6  :  0.8849912787038536
+
+Classes trobades:  [0. 1. 2. 3.]
+Atributs trobats:  20
+
+Score mitja del Leave One Out:  0.888
