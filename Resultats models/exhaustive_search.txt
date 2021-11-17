@@ -1,0 +1,41 @@
+----  Support Vector Machines  ----
+Parametres per defecte: {'C': 1.0, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovr', 'degree': 3, 'gamma': 'scale', 'kernel': 'rbf', 'max_iter': -1, 'probability': False, 'random_state': None, 'shrinking': True, 'tol': 0.001, 'verbose': False}
+
+Fitting 5 folds for each of 48 candidates, totalling 240 fits
+Els millors parametres:  {'C': 100, 'gamma': 0.01, 'kernel': 'sigmoid'}
+El millor score:  0.9594999999999999
+
+----  Perceptron  ----
+Parametres per defecte: {'alpha': 0.0001, 'class_weight': None, 'early_stopping': False, 'eta0': 1.0, 'fit_intercept': True, 'l1_ratio': 0.15, 'max_iter': 1000, 'n_iter_no_change': 5, 'n_jobs': None, 'penalty': None, 'random_state': 0, 'shuffle': True, 'tol': 0.001, 'validation_fraction': 0.1, 'verbose': 0, 'warm_start': False}
+
+Fitting 5 folds for each of 60 candidates, totalling 300 fits
+Els millors parametres:  {'alpha': 0.001, 'fit_intercept': True, 'penalty': 'l1', 'shuffle': True}
+El millor score:  0.7910000000000001
+
+----  KNN  ----
+Parametres per defecte: {'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'metric_params': None, 'n_jobs': None, 'n_neighbors': 5, 'p': 2, 'weights': 'uniform'}
+
+Fitting 5 folds for each of 36 candidates, totalling 180 fits
+Els millors parametres:  {'metric': 'manhattan', 'n_neighbors': 15, 'weights': 'distance'}
+El millor score:  0.6199999999999999
+
+----  Decision Tree  ----
+Parametres per defecte: {'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': None, 'max_leaf_nodes': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'random_state': None, 'splitter': 'best'}
+
+Fitting 5 folds for each of 50 candidates, totalling 250 fits
+Els millors parametres:  {'criterion': 'gini', 'max_depth': 20, 'min_samples_leaf': 10}
+El millor score:  0.8535
+
+----  Random Forest  ----
+Parametres per defecte: {'bootstrap': True, 'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': 'auto', 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'n_estimators': 100, 'n_jobs': None, 'oob_score': False, 'random_state': None, 'verbose': 0, 'warm_start': False}
+
+Fitting 5 folds for each of 288 candidates, totalling 1440 fits
+Els millors parametres:  {'bootstrap': True, 'max_depth': 110, 'max_features': 3, 'min_samples_leaf': 3, 'min_samples_split': 8, 'n_estimators': 1000}
+El millor score:  0.8709999999999999
+
+----  Logistic Regression  ----
+Parametres per defecte: {'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': None, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'l2', 'random_state': None, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}
+
+Fitting 5 folds for each of 7 candidates, totalling 35 fits
+Els millors parametres:  {'C': 10}
+El millor score:  0.9730000000000001
