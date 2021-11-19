@@ -11,7 +11,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import f1_score, precision_recall_curve, average_precision_score, roc_curve, auc
 from sklearn.datasets import load_wine
 
-
 dataset = pd.read_csv("../BD/price_classification.csv")
 dataset_values = dataset.values
 
@@ -25,20 +24,20 @@ plt.figure()
 sns.set()
 for i in range(dataset.shape[1] - 1):
     sns.scatterplot(data=dataset, x=titles[i], y=titles[-1], palette='pastel', hue="price_range")
-    plt.savefig("../Graficas-B/disp/Caracteristica" + str(i+1) + ".png")
+    plt.savefig("../Graficas-A/disp/Caracteristica" + str(i+1) + ".png")
     plt.clf()
     
 
 '''De barras'''
 
 sns.histplot(data=dataset, x="price_range", palette='pastel')
-plt.savefig("../Graficas-B/hist/histograma_preus.png")
+plt.savefig("../Graficas-A/hist/histograma_preus.png")
 plt.clf()
 
 
 for i in range(dataset.shape[1] - 1):
     sns.histplot(data=dataset, x=titles[i], hue="price_range", multiple="dodge", shrink=.8, palette='pastel')
-    plt.savefig("../Graficas-B/hist/Caracteristica" + str(i+1) + ".png")
+    plt.savefig("../Graficas-A/hist/Caracteristica" + str(i+1) + ".png")
     plt.clf()
 
 '''Mapa de calor'''
@@ -46,7 +45,7 @@ fig, ax = plt.subplots(figsize=(20,20))
 cmap = sns.color_palette('pastel', as_cmap=True)
 sns.heatmap(dataset.corr(), ax=ax, cmap=cmap, vmin=0, vmax=1, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5}, annot=True)
-plt.savefig("../Graficas-B/heatmap/mapa-de-calor.png")
+plt.savefig("../Graficas-A/heatmap/mapa-de-calor.png")
 plt.clf()
 
 
@@ -60,8 +59,7 @@ X = scaler.transform(X)
 
 y = wine.target
 nom_atributs = wine.feature_names
-nom_classes = wine.target_names
-n_clases = len(nom_classes)
+nom_classes = wine.target_names.reshape(-1)
 fig, sub = plt.subplots(1, 2, figsize=(16,6))
 sub[0].scatter(X[:,0], y, c=y, cmap=plt.cm.coolwarm, edgecolors='k')
 sub[1].scatter(X[:,1], y, c=y, cmap=plt.cm.coolwarm, edgecolors='k')
@@ -106,11 +104,13 @@ for part in particions:
     print("")
     
 
+n_clases = len(nom_classes)
+
 ''' creacion curvas roc y pr'''
-x_t, x_v, y_t, y_v = train_test_split(X, y, train_size=0.8)
 models = [LogisticRegression(), svm.SVC(probability=True), KNeighborsClassifier(), DecisionTreeClassifier()]
 nom_models = ["LogisticRegression","SVM","KNN","DecisionTree"]
 for o,model in enumerate(models):
+    x_t, x_v, y_t, y_v = train_test_split(X, y, train_size=0.8)
     model.fit(x_t,y_t)
     probs = model.predict_proba(x_v)
     # Compute Precision-Recall and plot curve
@@ -143,6 +143,8 @@ for o,model in enumerate(models):
     # Compute micro-average ROC curve and ROC area
     # Plot ROC curve
     plt.figure()
+    rnd_fpr, rnd_tpr, _ = roc_curve(y_v>0, np.zeros(y_v.size))
+    plt.plot(rnd_fpr, rnd_tpr, linestyle='--', label='Sense capacitat predictiva')
     for i in range(n_clases):
         plt.plot(fpr[i], tpr[i], label='ROC curve of class {0} (area = {1:0.2f})' ''.format(i, roc_auc[i]))
     plt.legend()

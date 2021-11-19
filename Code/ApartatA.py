@@ -48,23 +48,20 @@ param_grid = [param_svm, param_perceptron, param_knn, param_decisiontree, param_
 '''crear base de datos'''
 dataset = pd.read_csv("../BD/price_classification.csv")
 dataset_values = dataset.values
-
 titles = dataset.columns.values
 n_clases = dataset["price_range"].nunique()
 
+'''preparar les dades'''
 X = dataset_values[:,:-1]
-
 scaler = StandardScaler()
 scaler.fit(X)
 X = scaler.transform(X)
-
 y = dataset_values[:,-1]
+
+
 particions = [0.5, 0.8, 0.7]
 models = [svm.SVC(probability=True), Perceptron(), KNeighborsClassifier(), DecisionTreeClassifier(), RandomForestClassifier(), LogisticRegression()]
 nom_models = ["Support Vector Machines", "Perceptron", "KNN", "Decision Tree", "Random Forest", "Logistic Regression"]
-
-
-
 for i,model in enumerate(models):
     print("---- ", nom_models[i], " ----")
     print("Parametres per defecte: " + str(model.get_params()))
@@ -142,6 +139,8 @@ for i,model in enumerate(models):
     # Compute micro-average ROC curve and ROC area
     # Plot ROC curve
     plt.figure()
+    rnd_fpr, rnd_tpr, _ = roc_curve(y_v>0, np.zeros(y_v.size))
+    plt.plot(rnd_fpr, rnd_tpr, linestyle='--', label='Sense capacitat predictiva')
     for j in range(n_clases):
         plt.plot(fpr[j], tpr[j], label='ROC curve of class {0} (area = {1:0.2f})' ''.format(j, roc_auc[j]))
     plt.legend()
