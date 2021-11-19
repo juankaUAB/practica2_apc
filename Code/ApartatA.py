@@ -1,21 +1,18 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.linear_model import LogisticRegression
-from sklearn import svm, datasets
+from sklearn import svm
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import f1_score, precision_recall_curve, average_precision_score, roc_curve, auc
+from sklearn.metrics import classification_report, accuracy_score, f1_score, recall_score, precision_score, precision_recall_curve, average_precision_score, roc_curve, auc
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import LeaveOneOut
-from sklearn.metrics import accuracy_score,  precision_score, recall_score, roc_curve,roc_auc_score, auc
-from sklearn.metrics import confusion_matrix, plot_confusion_matrix, precision_recall_curve
+from sklearn.model_selection import LeaveOneOut, cross_val_score
 from sklearn.linear_model import Perceptron
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import ConfusionMatrixDisplay
 
 ''' DICCIONARIO PARA LA BUSQUEDA EXHAUSTIVA DE HYPERPARAMETERS'''
 param_svm = {'C': [0.1,1, 10, 100], 'gamma': [1,0.1,0.01,0.001],'kernel': ['rbf', 'poly', 'sigmoid']}
@@ -125,6 +122,7 @@ for i,model in enumerate(models):
                                ''.format(j, average_precision[j]))
         plt.xlabel('Recall')
         plt.ylabel('Precision')
+        plt.title(nom_models[i])
         plt.legend(loc="upper right")
     plt.savefig("../Graficas-A/pr/curva-pr" + str(nom_models[i]) + ".png")
     
@@ -143,10 +141,34 @@ for i,model in enumerate(models):
     plt.plot(rnd_fpr, rnd_tpr, linestyle='--', label='Sense capacitat predictiva')
     for j in range(n_clases):
         plt.plot(fpr[j], tpr[j], label='ROC curve of class {0} (area = {1:0.2f})' ''.format(j, roc_auc[j]))
+    plt.title(nom_models[i])
     plt.legend()
     plt.savefig("../Graficas-A/roc/curva-roc" + str(nom_models[i]) + ".png")
+
+
+print("METRICAS DE EVALUACIÓN")
+print("")
+models = [svm.SVC(probability=True), Perceptron(), KNeighborsClassifier(), DecisionTreeClassifier(), RandomForestClassifier(), LogisticRegression()]
+nom_models = ["Support Vector Machines", "Perceptron", "KNN", "Decision Tree", "Random Forest", "Logistic Regression"]
+cmaps = ['spring', 'summer', 'autumn', 'winter', 'cool','Wistia']
+nom_classes = ["Class 0", "Class 1","Class 2","Class 3"]
+for o, model in enumerate(models):
+    print("---- ",nom_models[o], " ----")
+    print("")
+    x_t, x_v, y_t, y_v = train_test_split(X, y, train_size=0.8)
+    model.fit(x_t,y_t)
+    prediccions = model.predict(x_v)
+    print("Accuracy score: ",accuracy_score(y_v, prediccions))
+    print("F1 score: ",f1_score(y_v, prediccions, average='weighted'))
+    print("Precision score: ",precision_score(y_v, prediccions, average='weighted'))
+    print("Recall score: ",recall_score(y_v, prediccions, average='weighted'))
+    ConfusionMatrixDisplay.from_predictions(y_v, prediccions,cmap=cmaps[o], normalize='true')
+    plt.title(nom_models[o])
+    plt.savefig("../Graficas-A/confusion_matrix/confusion_matrix_" + str(nom_models[o]) + ".png")
+    print("")
+    print(classification_report(y_v, prediccions, target_names=nom_classes))
     
-    
+
 
 
 
