@@ -93,43 +93,10 @@ for i,model in enumerate(models):
     print("Score mitja del Leave One Out: ", np.array(llista).mean())
     print("")
     
-    """Generar corbes ROC i PR"""
-    if nom_models[i] != "Perceptron":
-        x_t, x_v, y_t, y_v = train_test_split(X, y, train_size=0.8)
-        model.fit(x_t,y_t)
-        probs = model.predict_proba(x_v)
-        # Compute Precision-Recall and plot curve
-        precision = {}
-        recall = {}
-        average_precision = {}
-        plt.figure()
-        for j in range(n_clases):
-            precision[j], recall[j], _ = precision_recall_curve(y_v == j, probs[:, j])
-            average_precision[j] = average_precision_score(y_v == j, probs[:, j])
-    
-            plt.plot(recall[j], precision[j],
-            label='Precision-recall curve of class {0} (area = {1:0.2f})'
-                                   ''.format(j, average_precision[j]))
-            plt.xlabel('Recall')
-            plt.ylabel('Precision')
-            plt.legend(loc="upper right")
-        plt.savefig("../Graficas-A/pr/curva-pr" + str(nom_models[i]) + ".png")
-        
-        # Compute ROC curve and ROC area for each class
-        fpr = {}
-        tpr = {}
-        roc_auc = {}
-        for j in range(n_clases):
-            fpr[j], tpr[j], _ = roc_curve(y_v == j, probs[:, j])
-            roc_auc[j] = auc(fpr[j], tpr[j])
-    
-        # Compute micro-average ROC curve and ROC area
-        # Plot ROC curve
-        plt.figure()
-        for j in range(n_clases):
-            plt.plot(fpr[j], tpr[j], label='ROC curve of class {0} (area = {1:0.2f})' ''.format(j, roc_auc[j]))
-        plt.legend()
-        plt.savefig("../Graficas-A/roc/curva-roc" + str(nom_models[i]) + ".png")
+models = [svm.SVC(), Perceptron(), KNeighborsClassifier(), DecisionTreeClassifier(), RandomForestClassifier(), LogisticRegression()]
+nom_models = ["Support Vector Machines", "Perceptron", "KNN", "Decision Tree", "Random Forest", "Logistic Regression"]
+
+for i,model in enumerate(models):
     '''Busqueda exhaustiva de los mejores parametros'''
     print("BUSQUEDA EXHAUSTIVA DE PARAMETROS")
     grid = GridSearchCV(model, param_grid[i], verbose=3, n_jobs=-1)
@@ -137,6 +104,48 @@ for i,model in enumerate(models):
     print("Els millors parametres: ",grid.best_params_)
     print("El millor score: ", grid.best_score_)
     print("")
+
+
+models = [svm.SVC(probability=True), KNeighborsClassifier(), DecisionTreeClassifier(), RandomForestClassifier(), LogisticRegression()]
+nom_models = ["Support Vector Machines", "KNN", "Decision Tree", "Random Forest", "Logistic Regression"]
+
+for i,model in enumerate(models):
+    """Generar corbes ROC i PR"""
+    x_t, x_v, y_t, y_v = train_test_split(X, y, train_size=0.8)
+    model.fit(x_t,y_t)
+    probs = model.predict_proba(x_v)
+    # Compute Precision-Recall and plot curve
+    precision = {}
+    recall = {}
+    average_precision = {}
+    plt.figure()
+    for j in range(n_clases):
+        precision[j], recall[j], _ = precision_recall_curve(y_v == j, probs[:, j])
+        average_precision[j] = average_precision_score(y_v == j, probs[:, j])
+
+        plt.plot(recall[j], precision[j],
+        label='Precision-recall curve of class {0} (area = {1:0.2f})'
+                               ''.format(j, average_precision[j]))
+        plt.xlabel('Recall')
+        plt.ylabel('Precision')
+        plt.legend(loc="upper right")
+    plt.savefig("../Graficas-A/pr/curva-pr" + str(nom_models[i]) + ".png")
+    
+    # Compute ROC curve and ROC area for each class
+    fpr = {}
+    tpr = {}
+    roc_auc = {}
+    for j in range(n_clases):
+        fpr[j], tpr[j], _ = roc_curve(y_v == j, probs[:, j])
+        roc_auc[j] = auc(fpr[j], tpr[j])
+
+    # Compute micro-average ROC curve and ROC area
+    # Plot ROC curve
+    plt.figure()
+    for j in range(n_clases):
+        plt.plot(fpr[j], tpr[j], label='ROC curve of class {0} (area = {1:0.2f})' ''.format(j, roc_auc[j]))
+    plt.legend()
+    plt.savefig("../Graficas-A/roc/curva-roc" + str(nom_models[i]) + ".png")
     
     
 
